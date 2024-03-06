@@ -1,0 +1,11 @@
+//This is a program made in our custom language
+
+dec factorial(int n):
+    if_stmnt(n <= 1):
+        return 1
+    else_stmnt:
+        return n * factorial(n - 1)
+
+int num = input(" Enter a number: ")
+int result = factorial(num)
+print('Factorial:', result)
