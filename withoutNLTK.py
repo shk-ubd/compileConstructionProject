@@ -69,10 +69,13 @@ token_to_class = {
 
 # Open and read input file
 with open("input.txt", "r") as f:
-    input_program = f.read()
+    lines = f.readlines()
 
-# Tokenize input program
-input_program_tokens = re.findall(RE_String_Literal + r'|[\w]+|[^\w\s]', input_program)
+# Tokenize input program, ignoring commented lines
+input_program_tokens = []
+for line in lines:
+    if not line.strip().startswith('//'):
+        input_program_tokens += re.findall(RE_String_Literal + r'|[\w]+|[^\w\s]', line)
 
 # Categorize tokens
 for token in input_program_tokens:
