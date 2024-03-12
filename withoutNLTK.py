@@ -3,6 +3,7 @@ import re
 # Define regular expressions for token recognition
 RE_Identifier = r"[a-zA-Z_][a-zA-Z0-9_]*"
 RE_Integer_Literal = r"^-?\d+$"
+RE_String_Literal = r'\'[^\']*\'|\"[^\"]*\"'
 
 # Define token classes
 token_to_class = {
@@ -31,15 +32,18 @@ token_to_class = {
     '$': '$',
     '#': '#',
     ';': ';',
-    '"': '"',
     '(': '(',
     ')': ')',
-    "'": "'",
     '[': '[',
     ']': ']',
     ',': ',',
     ':': ':',
     '\\': '\\',
+    '\n': 'NEWLINE',
+    '\t': 'TAB',
+    '\r': 'CR',
+    '\b': 'BS',
+    '\\\\': 'BACKSLASH',
     '+': '+',
     '-': '-',
     '*': '*',
@@ -61,13 +65,6 @@ token_to_class = {
     '-=': '-=',
     '*=': '*=',
     '/=': '/=',
-    '\n': 'NEWLINE',
-    '\t': 'TAB',
-    '\r': 'CR',
-    '\b': 'BS',
-    '\\\\': 'BACKSLASH',
-    "'": 'SINGLE_QUOTE',
-    '"': 'DOUBLE_QUOTE'
 }
 
 # Open and read input file
@@ -75,7 +72,7 @@ with open("input.txt", "r") as f:
     input_program = f.read()
 
 # Tokenize input program
-input_program_tokens = re.findall(r'[\w]+|[^\w\s]', input_program)
+input_program_tokens = re.findall(RE_String_Literal + r'|[\w]+|[^\w\s]', input_program)
 
 # Categorize tokens
 for token in input_program_tokens:
@@ -85,5 +82,7 @@ for token in input_program_tokens:
         print(token + " is an identifier")
     elif re.match(RE_Integer_Literal, token):
         print(token + " is an integer literal")
+    elif re.match(RE_String_Literal, token):
+        print(token + " is a string literal")
     else:
         print(token + " is an invalid token")

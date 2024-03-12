@@ -6,6 +6,6 @@ dec factorial(int n):
     else_stmnt:
         return n * factorial(n - 1)
 
-int num = input(" Enter a number: ")
+int num = input("Enter a number: ")
 int result = factorial(num)
 print('Factorial:', result)
