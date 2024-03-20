@@ -9,8 +9,8 @@ RE_String_Literal = r'\'[^\']*\'|\"[^\"]*\"'
 token_to_class = {
     'int': 'DT',
     'bool': 'DT',
-    'if': 'if_stmnt',
-    'else': 'else_stmnt',
+    'if_stmnt': 'if_stmnt',
+    'else_stmnt': 'else_stmnt',
     'for': 'for',
     'True': 'TRUE',
     'False': 'FALSE',
